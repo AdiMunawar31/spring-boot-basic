@@ -2,9 +2,13 @@ package com.d2ycode.helloworld.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +39,33 @@ public class HeroMLBBController {
     counter++;
 
     return requestHero;
+  }
+
+  @PutMapping(path = "/edit-hero/{id}")
+  public Boolean editHero(@RequestBody Hero requestHero, @PathVariable Integer id) {
+    final Optional<Hero> result = heroes.stream().filter(hero -> hero.getId() == id).findFirst();
+
+    if (result.isPresent()) {
+      result.get().setName(requestHero.getName());
+      result.get().setDemage(requestHero.getDemage());
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @DeleteMapping(path = "/delete-hero/{id}")
+  public Boolean DeleteHero(@PathVariable Integer id) {
+    final Optional<Hero> result = heroes.stream().filter(hero -> hero.getId() == id).findFirst();
+
+    if (result.isPresent()) {
+      heroes.remove(result.get());
+
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
