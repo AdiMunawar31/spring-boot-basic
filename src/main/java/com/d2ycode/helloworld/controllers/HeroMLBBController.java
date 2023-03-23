@@ -6,11 +6,13 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.d2ycode.helloworld.models.Hero;
@@ -56,7 +58,7 @@ public class HeroMLBBController {
   }
 
   @DeleteMapping(path = "/delete-hero/{id}")
-  public Boolean DeleteHero(@PathVariable Integer id) {
+  public Boolean deleteHero(@PathVariable Integer id) {
     final Optional<Hero> result = heroes.stream().filter(hero -> hero.getId() == id).findFirst();
 
     if (result.isPresent()) {
@@ -68,4 +70,16 @@ public class HeroMLBBController {
     }
   }
 
+  @PatchMapping(path = "/change-status/{id}")
+  public Boolean changeStatus(@PathVariable Integer id, @RequestParam Boolean isNewHero) {
+    final Optional<Hero> result = heroes.stream().filter(hero -> hero.getId() == id).findFirst();
+
+    if (result.isPresent()) {
+      result.get().setIsNewHero(isNewHero);
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
