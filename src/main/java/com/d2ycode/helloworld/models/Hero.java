@@ -6,15 +6,13 @@ public class Hero {
   private int id;
   private String name;
   private int demage;
+  private Boolean isNewHero;
 
-  public Hero(int id, String name, int demage) {
+  public Hero(int id, String name, int demage, Boolean isNewHero) {
     this.id = id;
     this.name = name;
     this.demage = demage;
-  }
-
-  public Hero() {
-
+    this.isNewHero = isNewHero;
   }
 
   public int getId() {
@@ -39,6 +37,14 @@ public class Hero {
 
   public void setDemage(int demage) {
     this.demage = demage;
+  }
+
+  public Boolean getIsNewHero() {
+    return isNewHero;
+  }
+
+  public void setIsNewHero(Boolean isNewHero) {
+    this.isNewHero = isNewHero;
   }
 
 }
