@@ -1,4 +1,4 @@
-package com.d2ycode.helloworld.services;
+package com.d2ycode.helloworld.services.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.d2ycode.helloworld.models.Hero;
+import com.d2ycode.helloworld.services.HeroService;
 
 @Service
 public class HeroServiceImplementation implements HeroService {
